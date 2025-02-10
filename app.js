@@ -13,6 +13,10 @@ const io = socketio(server);
 app.set("view engine","ejs");
 app.set(express.static(path.join(__dirname,"public")));
 
+io.on("connection",function(socket){
+    console.log("Connection established Successfully");
+});
+
 app.get("/",(req,res)=>{
     res.send("LIVE TRACK.");
 });
