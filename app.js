@@ -21,6 +21,11 @@ io.on("connection", function (socket) {
         console.log(`Received from client: Latitude ${data.latitude}, Longitude ${data.longitude}`);
         io.emit("receive-location", { id: socket.id, ...data });
     });
+
+    socket.on("disconnect",function(){
+        io.emit("user-disconnected",socket.id);
+    });
+
 });
 
 

@@ -48,3 +48,11 @@ socket.on("receive-location", (data) => {
     }
 });
 
+
+socket.on("user-disconneected",(id) =>{
+    if(marker[id])
+    {
+        map.removelayer(marker[id]);
+        delete marker[id];
+    }
+});
