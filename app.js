@@ -13,13 +13,16 @@ const io = socketio(server);
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"public")));
 
-io.on("connection",function(socket){
-    socket.on("send-location",function(data){
-        io.emit("receive-location",{id:socket.id, ...data});
-    });
+
+io.on("connection", function (socket) {
     console.log("Connection established Successfully");
-    
+
+    socket.on("send-location", function (data) {
+        console.log(`Received from client: Latitude ${data.latitude}, Longitude ${data.longitude}`);
+        io.emit("receive-location", { id: socket.id, ...data });
+    });
 });
+
 
 app.get("/",(req,res)=>{
     res.render("index");
